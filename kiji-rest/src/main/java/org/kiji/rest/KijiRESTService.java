@@ -31,6 +31,7 @@ import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.json.ObjectMapperFactory;
 
+import org.kiji.rest.extras.CSVImporter;
 import org.kiji.rest.health.InstanceHealthCheck;
 import org.kiji.rest.resources.EntityIdResource;
 import org.kiji.rest.resources.InstanceResource;
@@ -126,5 +127,8 @@ public class KijiRESTService extends Service<KijiRESTConfiguration> {
         environment.getObjectMapperFactory().build()));
     environment.addResource(new RowResource(kijiClient));
     environment.addResource(new EntityIdResource(kijiClient));
+
+    // Extras
+    environment.addResource(new CSVImporter(kijiClient));
   }
 }
